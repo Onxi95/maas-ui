@@ -1,4 +1,4 @@
-import { QueryClient } from "@tanstack/react-query";
+import { QueryClient, type DefaultOptions } from "@tanstack/react-query";
 
 export const queryKeys = {
   zones: {
@@ -16,16 +16,18 @@ export type QueryKey =
 // first element of the queryKeys array
 export type QueryModel = QueryKey[number];
 
-export const defaultQueryOptions = {
-  staleTime: 5 * 60 * 1000, // 5 minutes
-  cacheTime: 15 * 60 * 1000, // 15 minutes
-  refetchOnWindowFocus: true,
-} as const;
+type QueryOptions = NonNullable<DefaultOptions>["queries"];
 
-export const realTimeQueryOptions = {
+export const defaultQueryOptions: QueryOptions = {
+  staleTime: 5 * 60 * 1000, // 5 minutes
+  gcTime: 15 * 60 * 1000, // 15 minutes
+  refetchOnWindowFocus: true,
+};
+
+export const realTimeQueryOptions: QueryOptions = {
   staleTime: 0,
-  cacheTime: 60 * 1000, // 1 minute
-} as const;
+  gcTime: 60 * 1000, // 1 minute
+};
 
 export const createQueryClient = () =>
   new QueryClient({
