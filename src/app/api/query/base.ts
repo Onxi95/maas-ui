@@ -55,7 +55,7 @@ export function useWebsocketAwareQuery<
   const connectedCount = useSelector(statusSelectors.connectedCount);
   const { subscribe } = useWebSocket();
 
-  const queryModelKey = Array.isArray(queryKey) ? queryKey[0] : "";
+  const queryModelKey = queryKey[0];
 
   useEffect(() => {
     queryClient.invalidateQueries();
